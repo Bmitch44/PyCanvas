@@ -8,5 +8,11 @@ path_to_vault = "/Users/bradymitchelmore/Library/Mobile Documents/iCloud~md~obsi
 
 # create a new canvas file and save it to the vault
 canvas = Canvas()
-canvas.add_node("text", text="Hello World!", x=100, y=100, width=100, height=100)
-canvas.save_to_file(f"{path_to_vault}/test.canvas")
+node1_id = canvas.add_node(node_type='text', text='Hello World!', x=100, y=100, width=100, height=100)
+node2_id = canvas.add_node(node_type='text', text='Hello World!', x=150, y=150, width=100, height=100)
+
+# Now you can use these IDs to create an edge
+canvas.add_edge('directional', node1_id, 'right', node2_id, 'left')
+
+# Save the canvas to a file
+canvas.save_to_file(f'{path_to_vault}/test.canvas')
