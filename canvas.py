@@ -25,7 +25,8 @@ class Edge:
             self.edge["fromEnd"] = fromEnd
 
 class Canvas:
-    def __init__(self):
+    def __init__(self, root_dir):
+        self.root_dir = root_dir
         self.canvas = {"nodes": [], "edges": []}
         self.node_map = {}
 
@@ -47,7 +48,7 @@ class Canvas:
         self.canvas["edges"].append(edge.edge)
 
     def save_to_file(self, filename):
-        with open(filename, 'w') as f:
+        with open(self.root_dir + filename, 'w') as f:
             json.dump(self.canvas, f)
 
 
