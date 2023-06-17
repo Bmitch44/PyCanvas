@@ -1,0 +1,22 @@
+# .gitignore
+
+# Ignore Python compiled files
+__pycache__/
+*.py[cod]
+
+# Ignore log files
+*.log
+
+# Ignore all __pycache__ directories
+**/__pycache__
+
+# Ignore .icloud files
+*.icloud
+
+# Ignore Mac system files
+.DS_Store
+**/.DS_Store
+
+# Ignore pytest cache
+pytest_cache/
+.pytest_cache/
