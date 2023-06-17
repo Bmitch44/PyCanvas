@@ -2,14 +2,17 @@ import uuid
 import json
 
 class Node:
-    def __init__(self, node_type, id, x=0, y=0, width=0, height=0, color="", label="", file=None, text=None):
+    def __init__(self, node_type, id, x=0, y=0, width=0, height=0, color="", label="", filename="", filepath="", text=""):
         self.node = {"type": node_type, "id": id, "x": x, "y": y, "width": width, "height": height, "color": color}
         node_items = list(self.node.items())
 
         if node_type == "group":
             node_items.insert(1, ("label", label))
         elif node_type == "file":
-            node_items.insert(1, ("file", file))
+            # save file to filepath
+            with open(filepath, 'w') as f:
+                f.write(text)
+            node_items.insert(1, ("file", filename))
         elif node_type == "text":
             node_items.insert(1, ("text", text))
 
@@ -33,9 +36,9 @@ class Canvas:
     def _generate_id(self):
         return uuid.uuid4().hex
 
-    def add_node(self, node_type, filename=None, text=None, x=0, y=0, width=0, height=0, color="", label=""):
+    def add_node(self, node_type, filename="", text="", x=0, y=0, width=0, height=0, color="", label=""):
         id = self._generate_id()
-        node = Node(node_type, id, x, y, width, height, color, label, file=filename, text=text)
+        node = Node(node_type, id, x, y, width, height, color, label, filepath=self.root_dir + filename, filename=filename, text=text)
         self.node_map[id] = node
         self.canvas["nodes"].append(node.node)
         return id
